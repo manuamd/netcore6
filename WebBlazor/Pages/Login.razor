@@ -1,0 +1,31 @@
+﻿@page "/ui/login"
+@inject HttpClient Http
+
+<h3>Login</h3>
+
+<input @bind="UserName" />
+<input @bind="Password" type="password" />
+<input @bind="Jwt" />
+<button @onclick="UserLogin">Login</button>
+@code {
+    private readonly HttpClient _httpClient = new HttpClient();
+
+    public string? UserName { get; set; }
+    public string? Password { get; set; }
+    public string? Jwt { get; set; }
+
+    public class Response
+    {
+        public int StatusCode { get; set; }
+
+        public string? Message { get; set; }
+
+        public string? Result { get; set; }
+    }
+
+    protected async void UserLogin()
+    {
+        var response = await Http.GetFromJsonAsync<Response>("https://localhost:44374/account/login");
+        Jwt = response?.Result;
+    } 
+}

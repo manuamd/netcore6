@@ -1,0 +1,14 @@
+﻿@page "/login"
+<EditForm Model="@loginModel" OnValidSubmit="LoginAsync">
+    <MudTextField @bind-Value="@loginModel.UserName" Label="UserName" Variant="Variant.Text"></MudTextField>
+    <MudTextField @bind-Value="@loginModel.Password" Label="Password" Variant="Variant.Outlined" InputType="InputType.Password"></MudTextField>
+    <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit"></MudButton>
+</EditForm>
+
+@code {
+    public class LoginModel
+    {
+          public string UserName {get; set;}
+          public string Password {get; set;}
+    }
+}
